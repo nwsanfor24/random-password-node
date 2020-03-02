@@ -1,0 +1,22 @@
+{
+  "name": "random-password-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nwsanfor24/random-password-node.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nwsanfor24/random-password-node/issues"
+  },
+  "homepage": "https://github.com/nwsanfor24/random-password-node#readme",
+  "dependencies": {
+    "inquirer": "^7.0.5"
+  }
+}
