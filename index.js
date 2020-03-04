@@ -1,11 +1,31 @@
 var inquirer = require("inquirer");
 
 //Prompts that ask user to specify their password
+function processPassword(answers){
+    console.log("Your password is:" + answers);
+}
+
+const questions = [
+    {
+        message: "Fill in the following boxes to generate your password",
+        type: "checkbox",
+        choices: [
+            { name: 'lowercase', checked: true},
+            { name: 'uppercase', checked: true},
+            { name: 'number', checked: true},
+            { name: 'symbol', checked: true},
+        ]
+    }
+];
+
 inquirer
     .prompt([
-        
+        questions
 ]);
 
+
+
+//Password functions
 const randomFunction = {
     lower: randomLower,
     upper: randomUpper,
