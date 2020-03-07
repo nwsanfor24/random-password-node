@@ -2,6 +2,7 @@
 	"password": [
 		"lowercase",
 		"uppercase",
-		"number"
+		"number",
+		"symbol"
 	]
 }
