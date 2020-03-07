@@ -24,7 +24,7 @@ inquirer.prompt([
     }
 ]).then(function (data) {
 
-    var filename = data.name.join('') + ".json";
+    var filename = data.name + ".json";
 
     fs.writeFile(filename, JSON.stringify(data, null, '\t'), function (err) {
 
@@ -32,7 +32,7 @@ inquirer.prompt([
             return console.log(err);
         }
 
-        console.log("Success!");
+        console.log("Success! Here is your random password " + randomPassword());
     });
 
 });
@@ -51,6 +51,4 @@ function randomPassword(length = 12) {
     }
     return pass;
 }
-
-console.log(randomPassword());
 
