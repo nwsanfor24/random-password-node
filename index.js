@@ -70,10 +70,7 @@ function getRandomSymbol() {
 }
 
 function randomPassword(length = 10) {
-    var chars = "abcdefghijklmnopqrstuvwxyz";
-    var symbols = "!@#$%^&*()-+<>";
-    var upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    var numbers = "0123456789";
+    var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     var pass = "";
     for (var x = 0; x < length; x++) {
         var i = Math.floor(Math.random() * chars.length);
