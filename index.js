@@ -1,27 +1,53 @@
 var inquirer = require("inquirer");
 
 //Prompts that ask user to specify their password
-function processPassword(answers){
+function processPassword(answers) {
     console.log("Your password is:" + answers);
 }
 
-const questions = [
-    {
-        message: "Fill in the following boxes to generate your password",
-        type: "checkbox",
-        choices: [
-            { name: 'lowercase', checked: true},
-            { name: 'uppercase', checked: true},
-            { name: 'number', checked: true},
-            { name: 'symbol', checked: true},
-        ]
-    }
-];
+//generate the question 
+userQuestion => {
+    inquirer
+        .prompt([
+            {
+                type: 'checkbox',
+                message: 'Select your password options',
+                name: 'password',
+                choices: [
+                    {
+                        name: 'lowercase'
+                    },
+                    {
+                        name: 'uppercase'
+                    },
+                    {
+                        name: 'number'
+                    },
+                    {
+                        name: 'symbol'
+                    },
+                ],
+            }
+        ])
+        .then(val => {
+            if (val.choice) {
+                this.generatePassword();
+            } else {
+                this.quit();
+            }
+        });
+}
+    
 
-inquirer
-    .prompt([
-        questions
-]);
+
+class randomFunction {
+    constructor(lower, upper, number, symbol) {
+        this.lower = lower;
+        this.upper = upper;
+        this.number = number;
+        this.symbol = symbol;
+    }
+}
 
 
 
@@ -37,10 +63,10 @@ function generatePassword(lower, upper, number, symbol, length) {
     let generatedPassword = '';
     const typesCount = lower + upper + number + symbol;
     const typesArr = [
-        {lower},
-        {upper},
-        {number},
-        {symbol}
+        { lower },
+        { upper },
+        { number },
+        { symbol }
     ].filter(item => Object.values(item)[0]);
 
     if (typesCount === 0) {
@@ -48,7 +74,7 @@ function generatePassword(lower, upper, number, symbol, length) {
     }
 
     //loop
-    for (let i=0; i<length; i+=typesCount) {
+    for (let i = 0; i < length; i += typesCount) {
         typesArr.forEach(type => {
             const funcName = Object.keys(type)[0];
             generatedPassword += randomFunction[funcName]();
