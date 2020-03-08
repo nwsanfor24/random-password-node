@@ -10,26 +10,51 @@ inquirer.prompt([
         choices: [
             {
                 name: 'lowercase',
+                validate: function(value) {
+                    if (value.name === 'lowercase') {
+                        console.log(getRandomLower());
+                        return true;
+                    } else {
+                        return "You can't do shit";
+                    }
+                }
             },
             {
-                name: 'uppercase'
+                name: 'uppercase',
+                validate: function (value) {
+                    if (value.name === 'uppercase') {
+                        console.log(getRandomUpper());
+                        return true;
+                    } else {
+                        return "YOU CAN'T DO SHIT";
+                    }
+                }
             },
             {
-                name: 'number'
+                name: 'number',
+                validate: function(value) {
+                    if (value.name === 'number') {
+                        console.log(getRandomNumber());
+                        return true;
+                    } else {
+                        return "7336";
+                    }
+                }
             },
             {
-                name: 'symbol'
+                name: 'symbol',
+                validate: function(value) {
+                    if (value.name === 'symbol') {
+                        console.log(getRandomSymbol());
+                        return true;
+                    } else {
+                        return "!@#$%^^&*";
+                    }
+                }
             },
         ],
     }
 ]).then(function (data) {
-
-    let userChoice = data.choices;
-    if(userChoice === 'lowercase') {
-        console.log(getRandomLower());
-    } else if (userChoice === 'uppercase') {
-        console.log(getRandomUpper());
-    }
 
     var filename = data.name + ".json";
 
