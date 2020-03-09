@@ -1,19 +1,18 @@
 var inquirer = require("inquirer");
 var fs = require('fs');
 
-//generate the question 
-inquirer.prompt([
-    {
-        type: 'checkbox',
-        message: 'Select your password options',
-        name: 'password',
-        choices: [
-            {
-                name: 'lowercase',
-                validate: function(value) {
-                    if (value.name === 'lowercase') {
-                        console.log(getRandomLower());
-                        return true;
+const questions = [{
+    type: 'checkbox',
+    name: 'password',
+    message: 'Select your password options',
+    choices: [
+        {
+            name: 'lowercase',
+                validate: function(input) {
+                    var done = this.async();
+                    if (typeof input === 'lowercase') {
+                        done(getRandomLower(), true);
+                        return;
                     } else {
                         return "You can't do shit";
                     }
@@ -21,10 +20,11 @@ inquirer.prompt([
             },
             {
                 name: 'uppercase',
-                validate: function (value) {
-                    if (value.name === 'uppercase') {
-                        console.log(getRandomUpper());
-                        return true;
+                validate: function (input) {
+                    var done = this.async();
+                    if (typeof input === 'uppercase') {
+                        done(getRandomUpper(), true);
+                        return;
                     } else {
                         return "YOU CAN'T DO SHIT";
                     }
@@ -32,10 +32,11 @@ inquirer.prompt([
             },
             {
                 name: 'number',
-                validate: function(value) {
-                    if (value.name === 'number') {
-                        console.log(getRandomNumber());
-                        return true;
+                validate: function(input) {
+                    var done = this.async();
+                    if (typeof input === 'number') {
+                        done(getRandomNumber(), true);
+                        return;
                     } else {
                         return "7336";
                     }
@@ -43,30 +44,21 @@ inquirer.prompt([
             },
             {
                 name: 'symbol',
-                validate: function(value) {
-                    if (value.name === 'symbol') {
-                        console.log(getRandomSymbol());
-                        return true;
+                validate: function(input) {
+                    var done = this.async();
+                    if (typeof input === 'symbol') {
+                        done(getRandomSymbol(), true);
+                        return;
                     } else {
                         return "!@#$%^^&*";
                     }
                 }
-            },
-        ],
-    }
-]).then(function (data) {
+            }
+    ]
+}];
 
-    var filename = data.name + ".json";
-
-    fs.writeFile(filename, JSON.stringify(data, null, '\t'), function (err) {
-
-        if (err) {
-            return console.log(err);
-        }
-
-        console.log("Success! Here is your random password: " + randomPassword());
-    });
-
+inquirer.prompt(questions).then(answers => {
+    console.log(`Success, here is your random password: ${answers['password']}`);
 });
 
 //random password function
@@ -92,15 +84,5 @@ function getRandomNumber() {
 function getRandomSymbol() {
 	const symbols = '!@#$%^&*(){}[]=<>/,.'
 	return symbols[Math.floor(Math.random() * symbols.length)];
-}
-
-function randomPassword(length = 10) {
-    var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    var pass = "";
-    for (var x = 0; x < length; x++) {
-        var i = Math.floor(Math.random() * chars.length);
-        pass += chars.charAt(i);
-    }
-    return pass;
 }
 
