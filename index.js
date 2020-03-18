@@ -1,5 +1,5 @@
 var inquirer = require("inquirer");
-var fs = require('fs');
+const Password = require("./pass");
 
 const questions = [{
     type: 'input',
