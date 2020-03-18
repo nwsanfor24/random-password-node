@@ -1,4 +1,4 @@
-const Character = require("./char");
+const Character = require(`./char`);
 
 class Password {
 

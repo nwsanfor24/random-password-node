@@ -6,16 +6,16 @@ class Char {
 
     charRegex() {
         switch(this.characters) {
-            case 'lowercase':
+            case `lowercase`:
                 return /[a-z]/g;
                 break;
-            case 'uppercase':
+            case `uppercase`:
                 return /[A-Z]/g;
                 break;
-            case 'number':
+            case `number`:
                 return /[0-9]/g;
                 break;
-            case 'special':
+            case `special`:
                 return /[\W|_]/g;
                 break;
         }
