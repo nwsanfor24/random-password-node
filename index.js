@@ -35,7 +35,7 @@ inquirer.prompt([
         validate: (val) => {
             const valueLength = val.length;
 
-            if (val.length > 0) {
+            if (valueLength > 0) {
                 return true;
             } else {
                 return error('How many times do I have to teach you this listen, old man? Select at least one or more characters');
