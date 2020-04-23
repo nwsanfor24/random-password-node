@@ -1,59 +1,63 @@
 const Character = require(`./char`);
 
 class Password {
-
-    constructor(characters, passLen) {
-        this.characters = characters;
-        this.numCharacterTypes = this.characters.length;
+    constructor(charTypes, passLen) {
+        this.charTypes = charTypes;
+        this.numCharTypes = this.charTypes.length;
         this.passLen = parseInt(passLen);
-        this.remainingCharacters = this.passLen - this.numCharacterTypes;
+        this.remainingChar = this.passLen - this.numCharTypes;
         this.password = [];
     }
 
-    generateCharacter(element) {
-        const newCharacterObj = new Character(element);
-        const newChar = newCharacterObj.finalPick();
+    generateChar(element) {
+        const newCharObj = new Character(element);
+        const newChar = newCharObj.finalPick();
         this.password.push(newChar);
     };
 
-    baseCharacter() {
-        this.characters.forEach(element => {
-            this.generateCharacter(element);
+    baseChar() {
+        this.charTypes.forEach(element => {
+            this.generateChar(element);
         });
         return this.password;
     };
 
-    additionalCharacter() {
-        for (let i = 0; i < this.remainingCharacters; i++) {
-            const randomNumber = Math.floor((Math.random() * this.numCharacterTypes));
-            const randType = this.characters[randomNumber];
-            this.generateCharacter(randType);
+    additionalChar() {
+        for ( let i = 0; i < this.remainingChar; i++) {
+            const randNum = Math.floor((Math.random() * this.numCharTypes));
+            const randType = this.charTypes[randNum];
+            this.generateChar(randType);
         };
         return this.password;
     };
 
-    finalPassArray() {
-        this.baseCharacter();
-        this.additionalCharacter();
+    finalPasswordArray() {
+        this.baseChar();
+        this.additionalChar();
+
+        /**
+         * Randomly shuffle an array
+         * https://stackoverflow.com/a/2450976/1293256
+         */
 
         let currentIndex = this.passLen;
         let tempVal;
-        let randomIndex;
+        let randIndex;
 
         while (0 !== currentIndex) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
+            randIndex = Math.floor(Math.random() * currentIndex);
             currentIndex -= 1;
 
             tempVal = this.password[currentIndex];
-            this.password[currentIndex] = this.password[randomIndex];
-            this.password[randomIndex] = tempVal;
+            this.password[currentIndex] = this.password[randIndex];
+            this.password[randIndex] = tempVal;
         }
 
         return this.password;
     }
 
     printPassword() {
-        this.finalPassArray();
+        this.finalPasswordArray();
         const finalPassword = this.password.join(``);
         return finalPassword;
     }

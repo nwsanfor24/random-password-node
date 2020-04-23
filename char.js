@@ -1,21 +1,21 @@
-class Char {
-    constructor(characters) {
-        this.chars = `!"#$%&'()*+,-./:;<=>?@[]^_\`{|}~1234567890abcdefghijklmnopqrstuvwxyABCDEFGHIJKLMNOPQRSTUVWXYZ`;
-        this.characters = characters;
+class Character {
+    constructor(charType) {
+        this.char = `!"#$%&'()*+,-./:;<=>?@[]^_\`{|}~1234567890abcdefghijklmnopqrstuvwxyABCDEFGHIJKLMNOPQRSTUVWXYZ`;
+        this.charType = charType;
     }
 
-    charRegex() {
-        switch(this.characters) {
-            case `lowercase`:
+    charRegex() { 
+        switch(this.charType) {
+            case `Lowercase`:
                 return /[a-z]/g;
                 break;
-            case `uppercase`:
+            case `Uppercase`:
                 return /[A-Z]/g;
                 break;
-            case `number`:
+            case `Number`:
                 return /[0-9]/g;
                 break;
-            case `special`:
+            case `Special`:
                 return /[\W|_]/g;
                 break;
         }
@@ -23,15 +23,15 @@ class Char {
 
     charArray() {
         const regex = this.charRegex();
-        return this.chars.match(regex);
+        return this.char.match(regex);
     }
 
     finalPick() {
         const array = this.charArray();
-        const arrayLength = array.length;
-        const index = Math.floor((Math.random() * arrayLength));
+        const arrayLen = array.length;
+        const index = Math.floor((Math.random() * arrayLen));
         return array[index];
     }
 }
 
-module.exports = Char;
+module.exports = Character;
